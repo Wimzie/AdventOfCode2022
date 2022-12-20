@@ -1,5 +1,5 @@
-#$inputGrid = Get-Content "C:\Scripts\Advent of Code\2022\8\input.txt"
-$inputGrid = Get-Content "C:\Scripts\Advent of Code\2022\8\testInput.txt"
+$inputGrid = Get-Content "C:\Scripts\Advent of Code\2022\8\input.txt"
+#$inputGrid = Get-Content "C:\Scripts\Advent of Code\2022\8\testInput.txt"
 $hiddenTrees = 0
 
 # function isTreeHidden {
@@ -84,9 +84,9 @@ For($i = 1; $i -lt $inputGrid.Count -1; $i++){
 #From East to West
 $i = $inputGrid.Count -1
 $highestTree = $inputGrid[$i][-1]
-For($i = $inputGrid.Count -2; $i -ge 0; $i--){
+For($i = $inputGrid.Count -2; $i -gt 0; $i--){
     $highestTree = $inputGrid[$i][-1]
-    For($j = 1; $j -lt $inputGrid[0].Length; $j++){
+    For($j = ($inputGrid[0].Length) - 2; $j -gt 0; $j--){
             
         if($inputGrid[$i][$j] -gt $highestTree){
             $visibleTrees["$i,$j"] = $true
@@ -109,7 +109,7 @@ For($j = 1; $j -lt $inputGrid[0].Length; $j++){
 }
 
 #From South to North
-For($j = ($inputGrid[0].Length) - 2; $j -ge 0; $j--){
+For($j = ($inputGrid[0].Length) - 2; $j -gt 0; $j--){
     $highestTree = $inputGrid[-1][$j]
     For($i = $inputGrid.Count -2; $i -ge 0; $i--){
         if($inputGrid[$i][$j] -gt $highestTree){
@@ -125,4 +125,4 @@ For($j = ($inputGrid[0].Length) - 2; $j -ge 0; $j--){
 
 
 
-Write-Host $hiddenTrees
+Write-Host $visibleTrees.Count
